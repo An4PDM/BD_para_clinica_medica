@@ -8,6 +8,10 @@
     <li> Relacionamentos; e</li>
     <li> Cardinalidades.</li>
   </ul>
-<p> O principal objetivo do modelo conceitual é representar de forma simples as informações do determinado contexto de negócios. </p>
-<p> OBS: É importante fazer revisões do DER, pois algumas incosistẽncias podem estar mascaradas no diagrama! </p>
-<p> O modelo lógico diz respeito à organização do Banco de Dados no nível do SGBD. </p>
+<p> O principal objetivo do modelo conceitual é representar de forma simples as informações do determinado contexto de negócios. Nesse projeto, foi utilizada a plataforma do brModelo para modelagem do DER e MR. </p>
+<p> OBS: É importante fazer revisões do DER, pois algumas incosistências podem estar mascaradas no diagrama! </p>
+<p> O modelo lógico diz respeito à organização do Banco de Dados no nível do SGBD. Essa etapa do processo pode ser feita diretamente no MySQL ou é automaticamente gerada pelo brModelo. </p>
+<p> Por fim, o modelo físico diz respeito à codificação. Nessa etapa, as tabelas e seus devidos relacionamentos são codificados, bem como a inserção de dados e consultas.</p>
+
+
+
