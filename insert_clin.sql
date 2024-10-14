@@ -185,7 +185,20 @@ INSERT INTO receita_medicamento (idRCM, idMRC) VALUES
 (5, 6);
 SELECT * FROM receita_medicamento;
 
-
+INSERT INTO doutor_especializacao VALUES 
+(1,2),
+(1,8),
+(2,1),
+(3,7),
+(3,5),
+(4,2),
+(5,9),
+(5,4),
+(6,10),
+(7,3),
+(8,2),
+(9,8),
+(10,1);
 
 
 

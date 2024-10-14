@@ -56,13 +56,44 @@ CALL insere_paciente (11, 'Alexandre','2000-08-24','rua aladim, n 445',1,'484722
 CALL insere_paciente (12, 'Paola','1991-10-18','rua zebra, n 15',1,'49382202313');
 
 -- Trigger de inserção automática de paciente na tabela paciente_doutor
+DELIMITER /
+CREATE TRIGGER insert_paciente_doutor 
+AFTER INSERT ON paciente
+FOR EACH ROW
+BEGIN
+    INSERT INTO paciente_doutor (idD)
+    VALUES (1);
+	INSERT INTO paciente_doutor
+    SET idP = NEW.idP;
+END /
+DELIMITER ;
 
+DROP TRIGGER insert_paciente_doutor;
+CALL insere_paciente (14, 'Laura','2000-10-20','rua ornio, n 15',1,'41182102313');
+SELECT * FROM paciente_doutor;
+-- ## Ambos os ids devem estar preenchidos na tabela ##
+
+-- Trigger para dados removidos de receita médica
+SELECT * FROM receita_medica;
+CREATE TABLE rec_del LIKE receita_medica;
+SELECT * FROM rec_del;
+
+DELIMITER /
+CREATE TRIGGER receitas_deletadas 
+AFTER DELETE ON receita_medica
+FOR EACH ROW
+BEGIN
+	INSERT INTO rec_del VALUES 
+    (OLD.idRC,OLD.idPRC,OLD.idD,OLD.data_emissao,OLD.CID);
+END /
+DELIMITER ;
+
+DELETE FROM receita_medica WHERE idRC = 10;
 
 -- Seleção de pacientes e respectivos doutores
 SELECT p.nome AS paciente, d.nome AS doutor
 FROM paciente p, doutor d, paciente_doutor pd
 WHERE p.idP=pd.idP AND d.crm=pd.idD;
-
 
 -- Seleção de receitas medicas com os respectivos medicamentos
 SELECT * FROM receita_medica;
@@ -79,12 +110,20 @@ UPDATE paciente SET nome='Carla Fontes' WHERE idP=8;
 UPDATE paciente SET nome='Tailson' WHERE idP=9;
 UPDATE paciente SET nome='Marcia' WHERE idP=10;
 
--- Especialização de cada doutor e se existem doutores com mais de um
+-- Especialização de cada doutor e se existem doutores com mais de uma
+SELECT * FROM especializacao;
+SELECT * FROM doutor;
+SELECT * FROM doutor_especializacao;
 
+SELECT d.nome as DOUTOR, e.nome as RAMO
+FROM especializacao e, doutor d, doutor_especializacao de
+WHERE de.idD=d.crm AND de.idE=e.idE;
 
 -- Criação de views 
 
+
 -- Criação de função que calcula o preço do medicamento
+
 
 -- Criação de trigger que é acionada quando um dado é excluído
 
